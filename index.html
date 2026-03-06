@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kennie Rotunda – Technology Transformation Executive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0f1e3c; --blue: #1a3a6e; --accent: #2e7de9; --gold: #e8a030;
+      --light: #f4f7fb; --white: #ffffff; --text: #2d3748; --muted: #718096; --border: #e2e8f0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--text); line-height: 1.6; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15,30,60,0.97); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+    }
+    .nav-logo { color: var(--white); font-weight: 700; font-size: 1.1rem; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: .82rem; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, #162952 55%, #1a4070 100%);
+      display: flex; align-items: center; padding: 80px 5% 60px;
+      position: relative; overflow: hidden;
+    }
+    #hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(46,125,233,0.15) 0%, transparent 70%); }
+    .hero-grid { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; }
+    .hero-tag { display: inline-block; background: rgba(232,160,48,0.15); border: 1px solid rgba(232,160,48,0.4); color: var(--gold); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; margin-bottom: 1.2rem; }
+    .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--white); line-height: 1.1; margin-bottom: .6rem; }
+    .hero-title { font-size: 1rem; color: var(--accent); font-weight: 600; letter-spacing: .04em; margin-bottom: 1.2rem; }
+    .hero-oneliner { font-size: 1.05rem; color: rgba(255,255,255,0.92); font-style: italic; line-height: 1.7; margin-bottom: 1.4rem; border-left: 3px solid var(--gold); padding-left: 1rem; }
+    .hero-bio { font-size: .9rem; color: rgba(255,255,255,0.62); line-height: 1.85; margin-bottom: 2.2rem; }
+    .hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 8px; font-size: .9rem; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.35); }
+    .hero-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 2rem; backdrop-filter: blur(10px); }
+    .hero-card h3 { color: var(--gold); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1.4rem; font-weight: 600; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-item { text-align: center; padding: 1.2rem; background: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); font-weight: 700; }
+    .stat-label { font-size: .7rem; color: rgba(255,255,255,0.5); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
+    .contact-list { margin-top: 1.6rem; display: flex; flex-direction: column; gap: .7rem; }
+    .contact-item { display: flex; align-items: center; gap: .7rem; color: rgba(255,255,255,0.65); font-size: .875rem; }
+    .contact-item svg { flex-shrink: 0; color: var(--accent); }
+
+    /* SECTION COMMONS */
+    section { padding: 90px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: .5rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,3vw,2.6rem); color: var(--navy); margin-bottom: 3rem; }
+    .section-title span { color: var(--accent); }
+
+    /* BRAND PILLARS */
+    #brand { background: var(--navy); }
+    #brand .section-label { color: var(--gold); }
+    .brand-intro { font-size: .95rem; color: rgba(255,255,255,0.58); max-width: 680px; margin-bottom: 3rem; line-height: 1.85; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .pillar-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; transition: border-color .25s, transform .25s; position: relative; overflow: hidden; }
+    .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--gold)); }
+    .pillar-card:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-4px); }
+    .pillar-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: rgba(255,255,255,0.06); font-weight: 700; line-height: 1; }
+    .pillar-card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: .7rem; margin-top: .4rem; }
+    .pillar-card p { font-size: .875rem; color: rgba(255,255,255,0.55); line-height: 1.75; }
+    .pillar-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.1rem; }
+    .pillar-tag { font-size: .68rem; font-weight: 600; letter-spacing: .06em; padding: 3px 10px; border-radius: 999px; background: rgba(46,125,233,0.15); border: 1px solid rgba(46,125,233,0.3); color: #7eb8f7; }
+    .brand-words { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.08); align-items: center; }
+    .brand-word { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; }
+    .brand-sep { color: rgba(255,255,255,0.2); font-size: 1.2rem; }
+
+    /* NARRATIVE */
+    #narrative { background: var(--white); }
+    .narrative-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .narrative-quote { background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); border-radius: 20px; padding: 2.5rem; position: relative; }
+    .narrative-quote::before { content: '\201C'; position: absolute; top: .5rem; left: 1.5rem; font-family: 'Playfair Display', serif; font-size: 7rem; color: rgba(255,255,255,0.07); line-height: 1; }
+    .narrative-quote p { font-size: 1rem; color: rgba(255,255,255,0.88); line-height: 1.9; font-style: italic; position: relative; z-index: 1; }
+    .narrative-quote cite { display: block; margin-top: 1.4rem; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); font-style: normal; }
+    .phases { display: flex; flex-direction: column; gap: 1.1rem; }
+    .phase { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.2rem 1.4rem; background: var(--light); border-radius: 14px; border: 1px solid var(--border); transition: border-color .2s; }
+    .phase:hover { border-color: var(--accent); }
+    .phase-badge { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #1a5cbf); display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 800; color: white; }
+    .phase h4 { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: .2rem; }
+    .phase p { font-size: .82rem; color: var(--muted); line-height: 1.65; }
+
+    /* SKILLS */
+    #skills { background: var(--light); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 1.6rem; transition: transform .25s, box-shadow .25s, border-color .25s; }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(15,30,60,0.1); border-color: var(--accent); }
+    .skill-icon { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #1a5cbf); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+    .skill-icon svg { color: white; }
+    .skill-card h3 { font-size: .95rem; font-weight: 700; color: var(--navy); margin-bottom: .4rem; }
+    .skill-card p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--white); }
+    .timeline { position: relative; padding-left: 2px; }
+    .timeline::before { content: ''; position: absolute; left: 19px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--accent), transparent); }
+    .job { display: flex; gap: 2rem; margin-bottom: 3rem; position: relative; }
+    .job-dot { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); border: 3px solid var(--white); box-shadow: 0 0 0 3px var(--accent); display: flex; align-items: center; justify-content: center; margin-top: 4px; }
+    .job-dot svg { color: white; width: 16px; height: 16px; }
+    .job-body { flex: 1; background: var(--light); border: 1px solid var(--border); border-radius: 16px; padding: 1.6rem 2rem; transition: box-shadow .2s; }
+    .job-body:hover { box-shadow: 0 8px 24px rgba(15,30,60,0.08); }
+    .job-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: .5rem; margin-bottom: .3rem; }
+    .job-company { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+    .job-period { font-size: .8rem; color: var(--muted); background: var(--white); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--border); }
+    .job-role { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: .3rem; }
+    .job-sub { font-size: .85rem; color: var(--muted); font-style: italic; margin-bottom: 1rem; }
+    .job-bullets { padding-left: 1.2rem; }
+    .job-bullets li { font-size: .875rem; color: var(--text); margin-bottom: .5rem; line-height: 1.65; }
+    .job-bullets li::marker { color: var(--accent); }
+    .brand-pill { display: inline-block; font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
+    .pill-structure { background: rgba(46,125,233,0.12); color: var(--accent); border: 1px solid rgba(46,125,233,0.25); }
+    .pill-execution { background: rgba(232,160,48,0.12); color: #c47f10; border: 1px solid rgba(232,160,48,0.3); }
+    .pill-scaling { background: rgba(15,30,60,0.08); color: var(--navy); border: 1px solid rgba(15,30,60,0.18); }
+
+    .addl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 1rem; margin-top: 2rem; }
+    .addl-card { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+    .addl-card strong { display: block; font-size: .9rem; color: var(--navy); }
+    .addl-card span { font-size: .8rem; color: var(--muted); }
+
+    /* EDUCATION */
+    #education { background: var(--light); }
+    .edu-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .block { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; }
+    .block-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg,var(--navy),var(--blue)); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+    .block-icon svg { color: var(--gold); }
+    .block h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: .3rem; }
+    .block p { font-size: .875rem; color: var(--muted); line-height: 1.6; }
+    .block .badge { display: inline-block; margin-top: .8rem; font-size: .75rem; font-weight: 600; background: rgba(46,125,233,0.1); color: var(--accent); padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(46,125,233,0.25); }
+
+    /* INTERESTS */
+    #interests { background: var(--white); }
+    .interests-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1.2rem; }
+    .interest-item { display: flex; align-items: center; gap: 1rem; background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.3rem; font-size: .9rem; font-weight: 500; color: var(--navy); }
+    .interest-item svg { color: var(--accent); flex-shrink: 0; }
+
+    footer { background: var(--navy); color: rgba(255,255,255,0.5); text-align: center; padding: 2.5rem 5%; font-size: .85rem; }
+    footer strong { color: var(--white); }
+
+    @media (max-width: 768px) {
+      .hero-grid, .pillars-grid, .narrative-grid, .edu-cert-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 4%; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: .72rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">K.<span>R</span></div>
+  <ul class="nav-links">
+    <li><a href="#brand">Brand</a></li>
+    <li><a href="#narrative">Narrative</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Credentials</a></li>
+    <li><a href="#interests">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">CIO · Transformation Leader · Strategic Operator</div>
+      <h1 class="hero-name">Kennie<br/>Rotunda</h1>
+      <div class="hero-title">Technology Transformation Executive</div>
+      <p class="hero-oneliner">I help growing organizations bring structure to complexity so strategy turns into scalable execution.</p>
+      <p class="hero-bio">I specialize in helping growing organizations bring structure to complexity. My career has focused on scaling companies through technology transformation, modernizing enterprise platforms, and building operating models that align people, process, and systems. My strength is translating strategy into practical systems, governance, and technology platforms that allow organizations to scale with clarity and discipline.</p>
+      <div class="hero-cta-row">
+        <a href="mailto:krotunda@proton.me" class="btn btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Get in Touch
+        </a>
+        <a href="https://linkedin.com/in/kennierotunda" target="_blank" class="btn btn-outline">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Career Highlights</h3>
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-num">25+</div>
+          <div class="stat-label">Years in IT</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4×</div>
+          <div class="stat-label">Org Scale (1.2K→4.8K)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">$3.2M</div>
+          <div class="stat-label">Annual Savings Led</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">80%</div>
+          <div class="stat-label">Business Value Lift</div>
+        </div>
+      </div>
+      <div class="contact-list">
+        <div class="contact-item">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Lone Tree, CO
+        </div>
+        <div class="contact-item">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.18a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 15.5z"/></svg>
+          720-244-9031
+        </div>
+        <div class="contact-item">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          krotunda@proton.me
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND PILLARS -->
+<section id="brand">
+  <div class="section-inner">
+    <div class="section-label">Leadership Brand</div>
+    <h2 class="section-title" style="color:var(--white);">Three Ideas People Associate <span style="color:var(--gold);">With My Work</span></h2>
+    <p class="brand-intro">Most IT leaders position themselves as infrastructure experts, cloud strategists, or technology architects. My positioning is different. I am a Strategic Operator — someone who builds the operating system that allows the company to scale. These three themes run through every role I've held.</p>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-num">01</div>
+        <h3>Bringing Structure to Complexity</h3>
+        <p>My superpower is creating order in fast-moving environments — organizing growth, introducing governance, creating operating models, and bringing clarity to ambiguous problems. This showed up repeatedly across every role.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag">Governance</span><span class="pillar-tag">Operating Models</span><span class="pillar-tag">Clarity</span>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">02</div>
+        <h3>Turning Strategy into Execution</h3>
+        <p>Many leaders create strategy. Few operationalize it. I translate ideas into systems, build practical roadmaps, align teams around outcomes, and move initiatives forward where others stall. I am a strategic operator.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag">Roadmaps</span><span class="pillar-tag">Systems</span><span class="pillar-tag">Delivery</span>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">03</div>
+        <h3>Scaling Organizations Without Bureaucracy</h3>
+        <p>I help companies mature while preserving speed — introducing structure, accountability, and discipline without slowing innovation. This is exactly what PE-backed companies, growth-stage firms, and transformation environments need.</p>
+        <div class="pillar-tags">
+          <span class="pillar-tag">Scaling</span><span class="pillar-tag">Accountability</span><span class="pillar-tag">Speed</span>
+        </div>
+      </div>
+    </div>
+    <div class="brand-words">
+      <span class="brand-word">Structure</span>
+      <span class="brand-sep">·</span>
+      <span class="brand-word">Clarity</span>
+      <span class="brand-sep">·</span>
+      <span class="brand-word">Execution</span>
+      <span class="brand-sep">·</span>
+      <span class="brand-word">Scaling</span>
+    </div>
+  </div>
+</section>
+
+<!-- NARRATIVE -->
+<section id="narrative">
+  <div class="section-inner">
+    <div class="section-label">Career Story</div>
+    <h2 class="section-title">The <span>Narrative</span> Arc</h2>
+    <div class="narrative-grid">
+      <div class="narrative-quote">
+        <p>I specialize in helping growing organizations bring structure to complexity. My career has focused on scaling companies through technology transformation, modernizing enterprise platforms, and building operating models that align people, process, and systems. I've spent much of my time working in high-growth environments where the challenge isn't vision — it's execution. My strength is translating strategy into practical systems, governance, and technology platforms that allow organizations to scale with clarity and discipline.</p>
+        <cite>— CIO Narrative · Kennie Rotunda</cite>
+      </div>
+      <div class="phases">
+        <div class="phase">
+          <div class="phase-badge">1</div>
+          <div>
+            <h4>Technology Leadership</h4>
+            <p>Deep experience across enterprise systems, IT operations, project delivery, and business alignment — learning how technology truly supports business.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-badge">2</div>
+          <div>
+            <h4>Transformation Leader</h4>
+            <p>Moved beyond operations to modernize platforms, lead large-scale initiatives, and introduce governance frameworks that aligned IT to strategy.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-badge">3</div>
+          <div>
+            <h4>Strategic Operator</h4>
+            <p>Role evolved to scaling organizations, supporting acquisitions, building operating models, and driving digital transformation as a genuine business partner to leadership.</p>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-badge">4</div>
+          <div>
+            <h4>CIO-Level Leadership</h4>
+            <p>Enterprise technology strategy, digital transformation, organizational scaling, and executive leadership. No longer just running IT — shaping how organizations grow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Core Competencies</div>
+    <h2 class="section-title">Skills & <span>Expertise</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Agile / SCRUM Project Leadership</h3>
+        <p>Agile methodologies for project management & development, including SAFe and product ownership across complex, multi-year initiatives.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Service & Process Optimization</h3>
+        <p>Continuous improvement to enhance business efficiency and reduce operating costs — turning overhead into measurable outcomes.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3>Organizational Change Management</h3>
+        <p>Talent management, operating model design, and driving adoption at scale — without losing speed or culture.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Digital Transformation</h3>
+        <p>End-to-end transformation across HRIS, CRM, ERP, data platforms, and analytics — from strategy all the way to live systems.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h3>Strategic Leadership & M&A</h3>
+        <p>Translating executive vision into roadmaps, managing pre/post M&A technology integrations, and aligning IT to business outcomes.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>IT Business Relationship Mgmt</h3>
+        <p>BRMP-certified. C-level partnership that operationalizes Business-Technology Strategy convergence and measures value delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Work History</div>
+    <h2 class="section-title">Professional <span>Experience</span></h2>
+    <div class="timeline">
+
+      <div class="job">
+        <div class="job-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="job-body">
+          <div class="job-header">
+            <span class="job-company">Loenbro · Westminster, CO</span>
+            <span class="job-period">August 2022 – March 2026</span>
+          </div>
+          <div class="job-role">Vice President, IT & Business Change Management</div>
+          <div class="job-sub">Data Center Electrical & Industrial Construction · Scaled from ~1,200 to 4,800+ employees</div>
+          <ul class="job-bullets">
+            <li>Led adoption of ITIL/ITSM practices, implemented a service management platform, and modernized IT operations. <span class="brand-pill pill-structure">Structure</span></li>
+            <li>Drove digital transformation with full adoption of HRIS, CRM, safety management, LMS, CLM, and intranet. <span class="brand-pill pill-execution">Execution</span></li>
+            <li>Led ground-up Microsoft Fabric Lakehouse and Power BI analytics solution.</li>
+            <li>Managed complex reconfiguration and optimization of the Trimble Viewpoint Vista ERP system.</li>
+            <li>Led large pre/post M&A system, data, and domain/infrastructure integrations. <span class="brand-pill pill-scaling">Scaling</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="job-body">
+          <div class="job-header">
+            <span class="job-company">CoorsTek · Golden, CO</span>
+            <span class="job-period">Feb 2021 – August 2022</span>
+          </div>
+          <div class="job-role">Director, IT Corporate Systems & PMO</div>
+          <div class="job-sub">Elevating IT as a value generator through Agile management and BRM</div>
+          <ul class="job-bullets">
+            <li>Led team responsible for Salesforce, Workday, UKG Kronos, AgilePoint, SharePoint, MS Teams, and SmartSheet.</li>
+            <li>Managed complex multi-year eCommerce program to transform business operations. <span class="brand-pill pill-execution">Execution</span></li>
+            <li>Created a newly formed PMO structure and operating model supporting both Agile and Waterfall. <span class="brand-pill pill-structure">Structure</span></li>
+            <li>Successfully deployed a Thailand HCM/Payroll solution. <span class="brand-pill pill-scaling">Scaling</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="job-body">
+          <div class="job-header">
+            <span class="job-company">Travelport · Centennial, CO</span>
+            <span class="job-period">Jan 2019 – Nov 2020</span>
+          </div>
+          <div class="job-role">Director, IT Business Relationship Management</div>
+          <div class="job-sub">Collaborative IT strategist partnering with C-level executives on strategy and solutions</div>
+          <ul class="job-bullets">
+            <li>Established IT BRM org to operationalize Business-Technology Strategy convergence. <span class="brand-pill pill-structure">Structure</span></li>
+            <li>Achieved an 80% increase in business value of solutions delivered as measured by satisfaction reviews.</li>
+            <li>Elevated the role of the PMO and SAFe/Agile functions as principals of transformational projects. <span class="brand-pill pill-execution">Execution</span></li>
+            <li>Secondary responsibility as Agile SCRUM product owner.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="job-body">
+          <div class="job-header">
+            <span class="job-company">Travelport · Centennial, CO</span>
+            <span class="job-period">2014 – 2018</span>
+          </div>
+          <div class="job-role">Director, Service Enablement (Commercial Operations)</div>
+          <div class="job-sub">GTM strategy, service design, self-service solutions, and customer experience</div>
+          <ul class="job-bullets">
+            <li>Directed global operations group of 40+ team members with a $3.8M budget. <span class="brand-pill pill-scaling">Scaling</span></li>
+            <li>Reduced time to deliver customer software products by more than 70%. <span class="brand-pill pill-execution">Execution</span></li>
+            <li>Achieved 30% reduction in operating costs through process improvement and staff consolidation.</li>
+            <li>Automated business processes to deliver API products faster — generating $1.3M in annual revenue.</li>
+            <li>Transitioned help desk to a self-service platform saving $2M annually.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="job-body">
+          <div class="job-header">
+            <span class="job-company">Travelport · Centennial, CO</span>
+            <span class="job-period">2005 – 2013</span>
+          </div>
+          <div class="job-role">Manager / Director, Application Development & Delivery</div>
+          <ul class="job-bullets">
+            <li>Directed 25 team members — managers, PMs, analysts, architects, and developers — on a $3.5M budget.</li>
+            <li>Completed three-year Agile XP project to build a product provisioning platform — $500K annual ROI.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:1rem;">Earlier Roles</div>
+    <div class="addl-grid">
+      <div class="addl-card"><strong>Solutions Architect</strong><span>JABIL / ISO 9000 · St. Petersburg, FL</span></div>
+      <div class="addl-card"><strong>Systems Administrator</strong><span>Checkers Restaurants · Clearwater, FL</span></div>
+      <div class="addl-card"><strong>Systems Admin / Technical Support Manager</strong><span>ValPak DMS / Cox Target Media · Largo, FL</span></div>
+      <div class="addl-card"><strong>Senior Windows/HPUX Engineer</strong><span>Travelport Network Management · 2000–2005</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Education & <span>Certifications</span></h2>
+    <div class="edu-cert-grid">
+      <div class="block">
+        <div class="block-icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <h3>Bachelor of Science, Information Technology</h3>
+        <p>University of Phoenix — On Campus</p>
+        <span class="badge">B.S. Information Technology</span>
+      </div>
+      <div class="block">
+        <div class="block-icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+        <h3>BRMP – Business Relationship Management Professional</h3>
+        <p>Issued by APMG International, 2020. Certifies expertise in BRM strategy, convergence, and measurable value generation.</p>
+        <span class="badge">APMG Certified · 2020</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERESTS -->
+<section id="interests">
+  <div class="section-inner">
+    <div class="section-label">Beyond the Office</div>
+    <h2 class="section-title">Interests & <span>Community</span></h2>
+    <div class="interests-grid">
+      <div class="interest-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Business Relationship Institute</div>
+      <div class="interest-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> BSA Den Leader & Committee Chair</div>
+      <div class="interest-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Avid Runner</div>
+      <div class="interest-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg> Artist</div>
+      <div class="interest-item"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Colorado CIO Group & Mentor</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Kennie Rotunda</strong> &nbsp;·&nbsp; Technology Transformation Executive &nbsp;·&nbsp; Lone Tree, CO<br/>
+  <span style="margin-top:.4rem;display:block;">krotunda@proton.me &nbsp;·&nbsp; 720-244-9031 &nbsp;·&nbsp; linkedin.com/in/kennierotunda</span>
+  <span style="margin-top:.5rem;display:block;font-size:.75rem;opacity:.4;">© 2026 Kennie Rotunda</span>
+</footer>
+
+</body>
+</html>
